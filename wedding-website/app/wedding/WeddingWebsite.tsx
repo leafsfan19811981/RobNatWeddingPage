@@ -3,23 +3,23 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Calendar,
-  MapPin,
-  Clock,
-  Car,
   Baby,
-  Utensils,
-  HelpCircle,
-  Gift,
-  Mail,
-  Music2,
+  Calendar,
+  Car,
   ChevronUp,
-  Image as ImageIcon,
-  ExternalLink,
-  ShieldCheck,
-  CloudRain,
   Cigarette,
+  Clock,
+  CloudRain,
+  ExternalLink,
   Flame,
+  Gift,
+  HelpCircle,
+  Image as ImageIcon,
+  Mail,
+  MapPin,
+  Music2,
+  ShieldCheck,
+  Utensils,
 } from "lucide-react";
 
 const THEME = {
@@ -30,13 +30,13 @@ const THEME = {
   cream: "#fbfaf7",
 };
 
-// Venue hero image (hosted on venue site/CDN)
+// Venue hero image (from Maple Hill Farm / CDN)
 const HERO_BG_URL =
   "https://i0.wp.com/www.maplehillfarm.ca/wp-content/uploads/2024/02/Maple-Hill-Farms-Wedding-10.jpg?fit=1080%2C785&ssl=1";
 
 const WEDDING = {
   couple: "Robert Phillips & Natalie Kavanaugh",
-  dateISO: "2026-08-22T15:00:00-04:00",
+  dateISO: "2026-08-23T15:00:00-04:00",
   rsvpByISO: "2026-05-31T23:59:59-04:00",
   venueName: "Maple Hills Farms",
   venueAddressLine: "450 Dominion Dr, Hanmer, ON P3P 0A8",
@@ -47,15 +47,19 @@ const WEDDING = {
   dinnerNote: "Buffet dinner catered by Cousin Vinneys Restaurant",
   kidsWelcome: true,
   parking: "Plenty of parking available on-site",
+
+  // Microsoft Forms embed (public)
   rsvpFormUrl:
     "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAJ59Z3xUQlk2SFBQS000WENSTVFJQzIzRDk0TVgyMi4u&embed=true",
+
+  // Leave blank until ready
   registryUrl: "",
 };
 
 const PHOTOS: Array<{ src: string; alt: string }> = [
   { src: "/photos/photo1.jpg", alt: "Rob & Natalie" },
   { src: "/photos/photo2.jpg", alt: "A moment together" },
-  { src: "/photos/photo3.png", alt: "Fun in the sun" },
+  { src: "/photos/photo3.png", alt: "Engagement photo" },
   { src: "/photos/photo4.png", alt: "A favorite memory" },
 ].filter((p) => Boolean(p.src));
 
@@ -69,7 +73,7 @@ const HOTELS: Array<{ tier: string; items: Hotel[] }> = [
         name: "Super 8 by Wyndham Sudbury",
         area: "Sudbury",
         url: "https://www.wyndhamhotels.com/en-ca/super-8/sudbury-ontario/super-8-sudbury-on/overview",
-        notes: "Simple, solid value with free breakfast + Wi‑Fi.",
+        notes: "Simple, solid value with free breakfast + Wi-Fi.",
       },
       {
         name: "Travelodge by Wyndham Sudbury",
@@ -167,7 +171,6 @@ function useCountdown(targetMs: number) {
     const id = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(id);
   }, []);
-
   const diff = Math.max(0, targetMs - now);
   const totalSeconds = Math.floor(diff / 1000);
   const days = Math.floor(totalSeconds / 86400);
@@ -211,7 +214,7 @@ function Card({ children, className }: { children: React.ReactNode; className?: 
   return (
     <div
       className={classNames(
-        "rounded-3xl border border-black/10 bg-white/75 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] backdrop-blur",
+        "rounded-3xl border border-black/10 bg-white/80 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] backdrop-blur",
         "transition hover:shadow-[0_16px_48px_rgba(0,0,0,0.10)]",
         className
       )}
@@ -515,21 +518,9 @@ function FAQ() {
       q: "Campfire?",
       a: "There’ll be a rustic campfire area for mingling… and possibly marshmallows.",
     },
-    {
-      icon: HelpCircle,
-      q: "Pets?",
-      a: "No pets, please (as much as we love them).",
-    },
-    {
-      icon: Car,
-      q: "Parking?",
-      a: "Plenty of on-site parking.",
-    },
-    {
-      icon: Baby,
-      q: "Kid-friendly?",
-      a: "Yes — kids are welcome.",
-    },
+    { icon: HelpCircle, q: "Pets?", a: "No pets, please (as much as we love them)." },
+    { icon: Car, q: "Parking?", a: "Plenty of on-site parking." },
+    { icon: Baby, q: "Kid-friendly?", a: "Yes — kids are welcome." },
   ];
 
   return (
@@ -560,7 +551,7 @@ function Travel() {
             <div className="text-base font-semibold">Hotel suggestions</div>
             <p className="mt-2 text-black/70">
               Most options are in Greater Sudbury; there are also a couple of nearby stays in Hanmer. The venue is about
-              a 20‑minute drive from downtown Sudbury, so staying in town is easy and gives you lots of food/coffee
+              a 20-minute drive from downtown Sudbury, so staying in town is easy and gives you lots of food/coffee
               options. Book early — summer weekends can fill up fast.
             </p>
           </div>
@@ -833,22 +824,17 @@ export default function WeddingWebsite() {
 
         {/* HERO */}
         <header className="relative">
-         <div className="absolute inset-0 -z-10">
-  <div
-    className="absolute inset-0 bg-cover bg-center"
-    style={{ backgroundImage: `url(${HERO_BG_URL})` }}
-  />
-
-  {/* Vertical fade (top to bottom) */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-[#fbfaf7]" />
-
-  {/* Left-side vignette (left to right) — this is the magic */}
-  <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
-</div>
-
+          <div className="absolute inset-0 -z-10">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${HERO_BG_URL})` }}
+            />
+            {/* Light overlay so black text stays crisp */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/40 to-[#fbfaf7]" />
+          </div>
 
           <div className="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pt-16 lg:px-8">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-3xl border border-white/15 bg-white/10 px-4 py-2 text-white/90 backdrop-blur">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-3xl border border-black/10 bg-white/60 px-4 py-2 text-black/80 backdrop-blur">
               <MapPin className="h-4 w-4" />
               <span className="text-sm">{WEDDING.venueName} • Hanmer, Ontario</span>
             </div>
@@ -859,19 +845,22 @@ export default function WeddingWebsite() {
               transition={{ duration: 0.6 }}
               className="grid gap-8 lg:grid-cols-12 lg:items-center"
             >
+              {/* Left side */}
               <div className="lg:col-span-7">
-                <div className="flex flex-wrap gap-2">
+                <div className="inline-flex flex-wrap gap-2 rounded-2xl bg-white/60 p-2 backdrop-blur">
                   <Pill tone="forest">Rustic outdoor tent wedding</Pill>
                   <Pill tone="gold">Ceremony outside the barn doors</Pill>
                   <Pill tone="maple">Formal • with humor</Pill>
                 </div>
 
-                <h1 className="mt-5 font-serif text-4xl font-semibold tracking-tight sm:text-6xl text-black drop-shadow-[0_8px_22px_rgba(255,255,255,0.55)]">
-                {WEDDING.couple}
-              </h1>
+                <h1 className="mt-5 font-serif text-4xl font-semibold tracking-tight sm:text-6xl text-black drop-shadow-[0_8px_22px_rgba(255,255,255,0.65)]">
+                  {WEDDING.couple}
+                </h1>
 
-               <p className="mt-4 text-lg text-black/80 sm:text-xl drop-shadow-[0_6px_18px_rgba(255,255,255,0.55)]">
-
+                <p className="mt-4 text-lg text-black/80 sm:text-xl drop-shadow-[0_6px_18px_rgba(255,255,255,0.60)]">
+                  We’re getting married at a maple syrup farm with a big tent, barn doors, and views for days. Nature is
+                  invited. Mosquitoes are not.
+                </p>
 
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <a
@@ -882,13 +871,13 @@ export default function WeddingWebsite() {
                   </a>
                   <a
                     href="#venue"
-                    className="inline-flex items-center justify-center rounded-2xl border border-white/25 bg-white/10 px-5 py-3 text-sm font-semibold text-white/95 backdrop-blur transition hover:bg-white/15"
+                    className="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white/70 px-5 py-3 text-sm font-semibold text-black/80 backdrop-blur transition hover:bg-white/85"
                   >
                     Venue + directions
                   </a>
                 </div>
 
-                <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-black/75 drop-shadow-[0_6px_18px_rgba(255,255,255,0.55)]">
+                <div className="mt-8 inline-flex flex-wrap items-center gap-3 rounded-2xl bg-white/60 p-3 text-sm text-black/75 backdrop-blur drop-shadow-[0_6px_18px_rgba(255,255,255,0.60)]">
                   <span className="inline-flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
                     {formatDateLong(weddingDate)}
@@ -904,16 +893,19 @@ export default function WeddingWebsite() {
                 </div>
               </div>
 
+              {/* Right side */}
               <div className="lg:col-span-5">
                 <Card className="overflow-hidden p-0">
                   <div className="relative">
                     <img src={PHOTOS[0]?.src} alt={PHOTOS[0]?.alt || "Photo"} className="h-56 w-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
                       <div className="flex items-center justify-between gap-4 text-white">
                         <div>
                           <div className="text-xs font-semibold tracking-widest text-white/80">COUNTDOWN</div>
-                          <div className="mt-1 text-2xl font-semibold">{countdown.done ? "It’s wedding time!" : "See you soon"}</div>
+                          <div className="mt-1 text-2xl font-semibold">
+                            {countdown.done ? "It’s wedding time!" : "See you soon"}
+                          </div>
                         </div>
                         <div className="hidden items-center gap-2 sm:flex">
                           <Pill tone="gold">
