@@ -835,7 +835,7 @@ export default function WeddingWebsite() {
         <header className="relative">
          <div className="lg:col-span-7 rounded-3xl border border-white/15 bg-black/30 p-6 backdrop-blur-md sm:p-8">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${HERO_BG_URL})` }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/25 to-[#fbfaf7]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/45 to-[#fbfaf7]" />
           </div>
 
           <div className="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pt-16 lg:px-8">
