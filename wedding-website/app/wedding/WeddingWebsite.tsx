@@ -833,10 +833,19 @@ export default function WeddingWebsite() {
 
         {/* HERO */}
         <header className="relative">
-         <div className="lg:col-span-7 rounded-3xl border border-white/15 bg-black/30 p-6 backdrop-blur-md sm:p-8">
-            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${HERO_BG_URL})` }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/45 to-[#fbfaf7]" />
-          </div>
+         <div className="absolute inset-0 -z-10">
+  <div
+    className="absolute inset-0 bg-cover bg-center"
+    style={{ backgroundImage: `url(${HERO_BG_URL})` }}
+  />
+
+  {/* Vertical fade (top to bottom) */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-[#fbfaf7]" />
+
+  {/* Left-side vignette (left to right) — this is the magic */}
+  <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
+</div>
+
 
           <div className="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pt-16 lg:px-8">
             <div className="mb-6 inline-flex items-center gap-2 rounded-3xl border border-white/15 bg-white/10 px-4 py-2 text-white/90 backdrop-blur">
