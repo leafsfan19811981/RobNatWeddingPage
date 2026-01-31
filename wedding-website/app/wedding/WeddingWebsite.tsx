@@ -36,7 +36,7 @@ const HERO_BG_URL =
 
 const WEDDING = {
   couple: "Robert Phillips & Natalie Kavanaugh",
-  dateISO: "2026-08-23T15:00:00-04:00",
+  dateISO: "2026-08-22T15:00:00-04:00",
   rsvpByISO: "2026-05-31T23:59:59-04:00",
   venueName: "Maple Hills Farms",
   venueAddressLine: "450 Dominion Dr, Hanmer, ON P3P 0A8",
@@ -53,13 +53,13 @@ const WEDDING = {
     "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAJ59Z3xUQlk2SFBQS000WENSTVFJQzIzRDk0TVgyMi4u&embed=true",
 
   // Leave blank until ready
-  registryUrl: "",
+  registryUrl: "  registryUrl: "https://www.amazon.ca/your-registry-link-here",
 };
 
 const PHOTOS: Array<{ src: string; alt: string }> = [
-  { src: "/photos/photo1.jpg", alt: "Rob & Natalie" },
-  { src: "/photos/photo2.jpg", alt: "A moment together" },
-  { src: "/photos/photo3.png", alt: "Engagement photo" },
+  { src: "/photos/photo3.jpg", alt: "Rob & Natalie" },
+  { src: "/photos/photo1.jpg", alt: "A moment together" },
+  { src: "/photos/photo2.png", alt: "Vibes" },
   { src: "/photos/photo4.png", alt: "A favorite memory" },
 ].filter((p) => Boolean(p.src));
 
