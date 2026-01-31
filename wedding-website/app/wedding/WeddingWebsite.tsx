@@ -53,13 +53,13 @@ const WEDDING = {
     "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAJ59Z3xUQlk2SFBQS000WENSTVFJQzIzRDk0TVgyMi4u&embed=true",
 
   // Leave blank until ready
-  registryUrl:"https://www.amazon.ca/your-registry-link-here",
+  registryUrl:"https://www.amazon.ca/wedding/guest-view/C514H7K0OMXA",
 };
 
 const PHOTOS: Array<{ src: string; alt: string }> = [
-  { src: "/photos/photo3.jpg", alt: "Rob & Natalie" },
+  { src: "/photos/photo3.png", alt: "Rob & Natalie" },
   { src: "/photos/photo1.jpg", alt: "A moment together" },
-  { src: "/photos/photo2.png", alt: "Vibes" },
+  { src: "/photos/photo2.jpg", alt: "Vibes" },
   { src: "/photos/photo4.png", alt: "A favorite memory" },
 ].filter((p) => Boolean(p.src));
 
