@@ -866,13 +866,12 @@ export default function WeddingWebsite() {
                   <Pill tone="maple">Formal • with humor</Pill>
                 </div>
 
-                <h1 className="mt-5 font-serif text-4xl font-semibold tracking-tight sm:text-6xl text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]">
-                  {WEDDING.couple}
-                </h1>
-                <p className="mt-4 text-lg text-white/85 sm:text-xl drop-shadow-[0_8px_22px_rgba(0,0,0,0.45)]">
-                  We’re getting married at a maple syrup farm with a big tent, barn doors, and views for days. Nature is
-                  invited. Mosquitoes are not.
-                </p>
+                <h1 className="mt-5 font-serif text-4xl font-semibold tracking-tight sm:text-6xl text-black drop-shadow-[0_8px_22px_rgba(255,255,255,0.55)]">
+                {WEDDING.couple}
+              </h1>
+
+               <p className="mt-4 text-lg text-black/80 sm:text-xl drop-shadow-[0_6px_18px_rgba(255,255,255,0.55)]">
+
 
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <a
@@ -889,7 +888,7 @@ export default function WeddingWebsite() {
                   </a>
                 </div>
 
-                <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-white/85 drop-shadow-[0_8px_22px_rgba(0,0,0,0.35)]">
+                <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-black/75 drop-shadow-[0_6px_18px_rgba(255,255,255,0.55)]">
                   <span className="inline-flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
                     {formatDateLong(weddingDate)}
