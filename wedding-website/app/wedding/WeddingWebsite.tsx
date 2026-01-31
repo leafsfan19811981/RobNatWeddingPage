@@ -53,7 +53,7 @@ const WEDDING = {
     "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAJ59Z3xUQlk2SFBQS000WENSTVFJQzIzRDk0TVgyMi4u&embed=true",
 
   // Leave blank until ready
-  registryUrl: "  registryUrl: "https://www.amazon.ca/your-registry-link-here",
+  registryUrl:"https://www.amazon.ca/your-registry-link-here",
 };
 
 const PHOTOS: Array<{ src: string; alt: string }> = [
