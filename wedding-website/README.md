@@ -15,3 +15,6 @@
 - Wedding details live in: app/wedding/WeddingWebsite.tsx (the `WEDDING` object)
 - Replace photos in: public/photos/
 - Update RSVP form URL in `WEDDING.rsvpFormUrl`
+
+## Design polish planning
+- See `docs/site-polish-plan.md` for a prioritized set of UX, content, accessibility, and performance improvements.
