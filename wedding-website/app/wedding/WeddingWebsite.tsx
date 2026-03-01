@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   Baby,
   Calendar,
@@ -388,12 +389,15 @@ function PhotoGrid() {
         transition={{ duration: 0.5 }}
         className="group relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm lg:col-span-7"
       >
-        <img
-          src={featured?.src}
-          alt={featured?.alt || "Photo"}
-          className="h-[320px] w-full object-cover transition duration-700 group-hover:scale-[1.03] sm:h-[420px]"
-          loading="lazy"
-        />
+        <div className="relative h-[320px] w-full sm:h-[420px]">
+          <Image
+            src={featured?.src || "/photos/photo1.jpg"}
+            alt={featured?.alt || "Photo"}
+            fill
+            className="object-cover transition duration-700 group-hover:scale-[1.03]"
+            sizes="(min-width: 1024px) 58vw, 100vw"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-90" />
         <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold tracking-widest text-white/90 backdrop-blur">
           FEATURED
@@ -413,12 +417,15 @@ function PhotoGrid() {
             transition={{ duration: 0.45, delay: idx * 0.03 }}
             className="group relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm"
           >
-            <img
-              src={p.src}
-              alt={p.alt}
-              className="h-48 w-full object-cover transition duration-700 group-hover:scale-[1.04]"
-              loading="lazy"
-            />
+            <div className="relative h-48 w-full">
+              <Image
+                src={p.src}
+                alt={p.alt}
+                fill
+                className="object-cover transition duration-700 group-hover:scale-[1.04]"
+                sizes="(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw"
+              />
+            </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-80" />
             <div className="absolute bottom-3 left-3 right-3 text-sm text-white/90">{p.alt}</div>
           </motion.div>
@@ -897,7 +904,16 @@ export default function WeddingWebsite() {
               <div className="lg:col-span-5">
                 <Card className="overflow-hidden p-0">
                   <div className="relative">
-                    <img src={PHOTOS[0]?.src} alt={PHOTOS[0]?.alt || "Photo"} className="h-56 w-full object-cover" />
+                    <div className="relative h-56 w-full">
+                      <Image
+                        src={PHOTOS[0]?.src || "/photos/photo1.jpg"}
+                        alt={PHOTOS[0]?.alt || "Photo"}
+                        fill
+                        className="object-cover"
+                        sizes="(min-width: 1024px) 40vw, 100vw"
+                        priority
+                      />
+                    </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
                       <div className="flex items-center justify-between gap-4 text-white">
