@@ -225,10 +225,41 @@ function Card({ children, className }: { children: React.ReactNode; className?: 
   );
 }
 
+function FloralAccent({
+  className,
+  side = "left",
+}: {
+  className?: string;
+  side?: "left" | "right";
+}) {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      viewBox="0 0 120 40"
+      className={classNames("h-6 w-16 text-[rgba(47,74,58,0.45)]", side === "right" && "scale-x-[-1]", className)}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M10 32C24 30 40 24 54 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M42 20C44 12 53 8 60 10C56 18 48 22 42 20Z" fill="rgba(139,47,47,0.38)" />
+      <path d="M27 25C29 18 35 14 42 15C39 22 33 27 27 25Z" fill="rgba(47,74,58,0.45)" />
+      <path d="M54 12C64 8 74 7 86 8" stroke="rgba(200,162,90,0.72)" strokeWidth="1.4" strokeLinecap="round" />
+      <circle cx="88" cy="8" r="2.6" fill="rgba(139,47,47,0.55)" />
+      <circle cx="95" cy="11" r="2" fill="rgba(47,74,58,0.5)" />
+      <path d="M72 14C74 10 79 8 84 9C82 14 77 16 72 14Z" fill="rgba(47,74,58,0.38)" />
+    </svg>
+  );
+}
+
 function RusticDivider() {
   return (
     <div aria-hidden className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div className="my-10 h-px w-full bg-gradient-to-r from-transparent via-black/15 to-transparent" />
+      <div className="my-10 flex items-center gap-3">
+        <FloralAccent className="hidden sm:block" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-black/15 to-transparent" />
+        <FloralAccent side="right" className="hidden sm:block" />
+      </div>
     </div>
   );
 }
