@@ -38,12 +38,12 @@ const HERO_BG_URL =
 const WEDDING = {
   couple: "Robert Phillips & Natalie Kavanaugh",
   dateISO: "2026-08-22T15:00:00-04:00",
-  rsvpByISO: "2026-05-31T23:59:59-04:00",
+  rsvpByISO: "2026-06-12T23:59:59-04:00",
   venueName: "Maple Hills Farms",
   venueAddressLine: "450 Dominion Dr, Hanmer, ON P3P 0A8",
   venueWebsite: "https://www.maplehillfarm.ca/",
   venueWeddingPackages: "https://www.maplehillfarm.ca/wedding-packages/",
-  ceremonyTime: "3:00 PM",
+  ceremonyTime: "4:00 PM",
   dinnerTime: "5:00 PM",
   dinnerNote: "Buffet dinner catered by Cousin Vinneys Restaurant",
   kidsWelcome: true,
@@ -164,6 +164,14 @@ function formatDateLong(date: Date) {
 
 function formatMonthDay(date: Date) {
   return date.toLocaleDateString("en-CA", { month: "long", day: "numeric" });
+}
+
+function formatMonthDayOrdinal(date: Date) {
+  const day = date.getDate();
+  const suffix = day >= 11 && day <= 13 ? "th" : day % 10 === 1 ? "st" : day % 10 === 2 ? "nd" : day % 10 === 3 ? "rd" : "th";
+  const month = date.toLocaleDateString("en-CA", { month: "long" });
+
+  return `${month} ${day}${suffix}`;
 }
 
 function useCountdown(targetMs: number) {
@@ -478,7 +486,7 @@ function RSVPBlock() {
           <div>
             <div className="text-base font-semibold">RSVP</div>
             <div className="mt-1 text-black/70">
-              Please RSVP by {formatMonthDay(rsvpBy)}, {rsvpBy.getFullYear()}.
+              Please RSVP by {formatMonthDayOrdinal(rsvpBy)}, {rsvpBy.getFullYear()}.
             </div>
           </div>
           <Pill tone="gold">
@@ -748,7 +756,7 @@ function DetailsGrid() {
           <div>
             <div className="font-semibold">RSVP deadline</div>
             <div className="text-black/70">
-              {formatMonthDay(rsvpBy)}, {rsvpBy.getFullYear()}
+              {formatMonthDayOrdinal(rsvpBy)}, {rsvpBy.getFullYear()}
             </div>
           </div>
         </div>
@@ -1007,7 +1015,7 @@ export default function WeddingWebsite() {
           <Section id="schedule" title="Schedule" kicker="How the day flows" icon={Clock}>
             <div className="grid gap-4 lg:grid-cols-3">
               <Card>
-                <div className="text-base font-semibold">3:00 PM</div>
+                <div className="text-base font-semibold">{WEDDING.ceremonyTime}</div>
                 <div className="mt-1 text-black/70">Ceremony</div>
                 <div className="mt-2 text-sm text-black/60">Outside the barn doors (weather-permitting)</div>
               </Card>
