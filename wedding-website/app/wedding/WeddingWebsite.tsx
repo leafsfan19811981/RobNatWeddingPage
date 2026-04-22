@@ -31,9 +31,22 @@ const THEME = {
   cream: "#fbfaf7",
 };
 
-// Venue hero image (from Maple Hill Farm / CDN)
-const HERO_BG_URL =
-  "https://i0.wp.com/www.maplehillfarm.ca/wp-content/uploads/2024/02/Maple-Hill-Farms-Wedding-10.jpg?fit=1080%2C785&ssl=1";
+const HERO_BACKGROUNDS = {
+  mapleDusk: {
+    label: "Maple dusk",
+    src: "/backgrounds/hero-maple-dusk.svg",
+  },
+  forestGolden: {
+    label: "Forest golden",
+    src: "/backgrounds/hero-forest-golden.svg",
+  },
+  softCream: {
+    label: "Soft cream",
+    src: "/backgrounds/hero-soft-cream.svg",
+  },
+} as const;
+
+const ACTIVE_HERO_THEME: keyof typeof HERO_BACKGROUNDS = "mapleDusk";
 
 const WEDDING = {
   couple: "Robert Phillips & Natalie Kavanaugh",
@@ -851,6 +864,15 @@ function Venue() {
 export default function WeddingWebsite() {
   const weddingDate = useMemo(() => new Date(WEDDING.dateISO), []);
   const countdown = useCountdown(weddingDate.getTime());
+  const currentHero = HERO_BACKGROUNDS[ACTIVE_HERO_THEME];
+  const [heroImageLoaded, setHeroImageLoaded] = useState(true);
+
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = currentHero.src;
+    img.onload = () => setHeroImageLoaded(true);
+    img.onerror = () => setHeroImageLoaded(false);
+  }, [currentHero.src]);
 
   return (
     <div id="top" className="min-h-screen text-black" style={{ background: THEME.cream }}>
@@ -864,11 +886,13 @@ export default function WeddingWebsite() {
         <header className="relative">
           <div className="absolute inset-0 -z-10">
             <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${HERO_BG_URL})` }}
+              className="absolute inset-0 bg-gradient-to-br from-[#fbf5ea] via-[#f2e4d4] to-[rgba(139,47,47,0.28)] bg-cover bg-center"
+              style={heroImageLoaded ? { backgroundImage: `url(${currentHero.src})` } : undefined}
+              role="img"
+              aria-label={`Hero background: ${currentHero.label}`}
             />
-            {/* Light overlay so black text stays crisp */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/40 to-[#fbfaf7]" />
+            {/* Light overlay so black text stays crisp and AA-accessible */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/55 to-[#fbfaf7]" />
           </div>
 
           <div className="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pt-16 lg:px-8">
