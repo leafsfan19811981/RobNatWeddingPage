@@ -50,6 +50,47 @@ Optional add-ons when needed: timeless, intimate, airy, cinematic softness.
 - **Mobile crops**: produce a vertical-safe companion crop (recommended 1080 x 1350 or 1080 x 1440) while preserving core subject and text-safe area.
 - Export in high-quality JPG (photo-heavy) or PNG/WebP when edge fidelity is important.
 
+### 4.1) Performance image budget (must pass before merging)
+Use these as hard caps to avoid regressions:
+
+- **Hero background (active variant only):** `<= 350 KB`
+- **Section background image (each):** `<= 220 KB`
+- **Gallery photos (each):** `<= 300 KB`
+
+If an image exceeds the cap, crop tighter, reduce quality, or simplify texture detail.
+
+### 4.2) Modern format + fallback policy
+- Export **AVIF first** (best compression), then **WebP** as fallback.
+- Keep a **JPEG fallback** for compatibility when needed.
+- For photo content rendered through `next/image`, Next.js will negotiate modern formats automatically; still provide optimized source files.
+- For CSS/background images, ship explicit responsive assets (desktop + mobile) and prefer AVIF/WebP source files where possible.
+
+### 4.3) Required naming + variants
+Every hero and section background must include desktop/mobile variants:
+
+- Hero: `hero-desktop.(avif|webp|jpg)` and `hero-mobile.(avif|webp|jpg)`
+- Section examples: `travel-desktop.*` + `travel-mobile.*`, `rsvp-desktop.*` + `rsvp-mobile.*`
+
+In code, wire both variants in `HERO_BACKGROUNDS` and `SECTION_BACKGROUNDS` so responsive switching is automatic.
+
+### 4.4) Loading strategy (critical vs non-critical)
+- **Preload only the active hero image** (desktop or mobile, never both).
+- **Do not preload** section backgrounds or gallery images.
+- Keep non-critical media lazy-loaded (`loading="lazy"` and default `next/image` lazy behavior).
+
+### 4.5) Visual QA checklist (before publish)
+Review imagery at these breakpoints and adjust crops/focal point when needed:
+
+- **Mobile:** `390 x 844`
+- **Tablet:** `768 x 1024`
+- **Desktop:** `1440 x 900`
+
+For each breakpoint, verify:
+- Couple/subject focal point is not cropped awkwardly.
+- Text-safe zones remain clear for headings and CTA buttons.
+- Overlay + background contrast keeps body text readable.
+- File size budget is still respected after final export.
+
 ### 5) Reusable prompt template
 Use this template for batch generation:
 
