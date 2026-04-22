@@ -134,30 +134,6 @@ const PHOTOS: PhotoItem[] = [
     ratio: "3:2",
     sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
   },
-  {
-    src: "/photos/filler-rings-detail.svg",
-    alt: "Wedding bands resting on linen with botanical shadows.",
-    ratio: "4:5",
-    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
-  },
-  {
-    src: "/photos/filler-florals.svg",
-    alt: "Soft floral arrangement inspired by maple, cream, and forest greens.",
-    ratio: "3:2",
-    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
-  },
-  {
-    src: "/photos/filler-venue-detail.svg",
-    alt: "Barn venue detail with string lights and warm evening ambiance.",
-    ratio: "4:5",
-    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
-  },
-  {
-    src: "/photos/filler-invitation-texture.svg",
-    alt: "Invitation paper texture with deckled edges and watercolor bloom.",
-    ratio: "3:2",
-    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
-  },
 ] satisfies PhotoItem[];
 
 type Hotel = { name: string; area: string; url: string; notes: string };
