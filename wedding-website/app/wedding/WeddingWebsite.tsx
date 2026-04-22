@@ -77,11 +77,62 @@ const WEDDING = {
   registryUrl:"https://www.amazon.ca/wedding/guest-view/C514H7K0OMXA",
 };
 
-const PHOTOS: Array<{ src: string; alt: string }> = [
-  { src: "/photos/photo3.png", alt: "Rob & Natalie" },
-  { src: "/photos/photo1.jpg", alt: "A moment together" },
-  { src: "/photos/photo2.jpg", alt: "Vibes" },
-  { src: "/photos/photo4.png", alt: "A favorite memory" },
+type PhotoItem = {
+  src: string;
+  alt: string;
+  ratio: "4:5" | "3:2";
+  sizes: string;
+};
+
+const PHOTOS: PhotoItem[] = [
+  {
+    src: "/photos/photo3.png",
+    alt: "Rob and Natalie sharing a cozy, candid moment together.",
+    ratio: "4:5",
+    sizes: "(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw",
+  },
+  {
+    src: "/photos/photo1.jpg",
+    alt: "Golden-hour portrait with warm maple-toned highlights.",
+    ratio: "3:2",
+    sizes: "(min-width: 1024px) 58vw, 100vw",
+  },
+  {
+    src: "/photos/photo2.jpg",
+    alt: "A playful snapshot with soft contrast and rich autumn color.",
+    ratio: "4:5",
+    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
+  },
+  {
+    src: "/photos/photo4.png",
+    alt: "A favorite memory framed with warm, romantic tones.",
+    ratio: "3:2",
+    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
+  },
+  {
+    src: "/photos/filler-rings-detail.svg",
+    alt: "Wedding bands resting on linen with botanical shadows.",
+    ratio: "4:5",
+    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
+  },
+  {
+    src: "/photos/filler-florals.svg",
+    alt: "Soft floral arrangement inspired by maple, cream, and forest greens.",
+    ratio: "3:2",
+    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
+  },
+  {
+    src: "/photos/filler-venue-detail.svg",
+    alt: "Barn venue detail with string lights and warm evening ambiance.",
+    ratio: "4:5",
+    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
+  },
+  {
+    src: "/photos/filler-invitation-texture.svg",
+    alt: "Invitation paper texture with deckled edges and watercolor bloom.",
+    ratio: "3:2",
+    sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
+  },
 ].filter((p) => Boolean(p.src));
 
 type Hotel = { name: string; area: string; url: string; notes: string };
@@ -451,8 +502,12 @@ function Footer() {
 }
 
 function PhotoGrid() {
-  const featured = PHOTOS[0];
-  const rest = PHOTOS.slice(1);
+  const featured = PHOTOS.find((photo) => photo.ratio === "3:2") ?? PHOTOS[0];
+  const rest = PHOTOS.filter((photo) => photo !== featured);
+  const ratioClasses: Record<PhotoItem["ratio"], string> = {
+    "4:5": "aspect-[4/5]",
+    "3:2": "aspect-[3/2]",
+  };
 
   return (
     <div className="grid gap-4 lg:grid-cols-12">
@@ -463,13 +518,13 @@ function PhotoGrid() {
         transition={{ duration: 0.5 }}
         className="group relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm lg:col-span-7"
       >
-        <div className="relative h-[320px] w-full sm:h-[420px]">
+        <div className="relative w-full aspect-[3/2]">
           <Image
             src={featured?.src || "/photos/photo1.jpg"}
             alt={featured?.alt || "Photo"}
             fill
-            className="object-cover transition duration-700 group-hover:scale-[1.03]"
-            sizes="(min-width: 1024px) 58vw, 100vw"
+            className="object-cover saturate-[0.92] contrast-[1.06] brightness-[1.03] transition duration-700 group-hover:scale-[1.03]"
+            sizes={featured?.sizes || "(min-width: 1024px) 58vw, 100vw"}
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-90" />
@@ -491,16 +546,16 @@ function PhotoGrid() {
             transition={{ duration: 0.45, delay: idx * 0.03 }}
             className="group relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm"
           >
-            <div className="relative h-48 w-full">
+            <div className={classNames("relative w-full", ratioClasses[p.ratio])}>
               <Image
                 src={p.src}
                 alt={p.alt}
                 fill
-                className="object-cover transition duration-700 group-hover:scale-[1.04]"
-                sizes="(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover saturate-[0.92] contrast-[1.06] brightness-[1.03] transition duration-700 group-hover:scale-[1.04]"
+                sizes={p.sizes}
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(42,32,24,0.56)] via-[rgba(139,47,47,0.12)] to-transparent opacity-85" />
             <div className="absolute bottom-3 left-3 right-3 text-sm text-white/90">{p.alt}</div>
           </motion.div>
         ))}
