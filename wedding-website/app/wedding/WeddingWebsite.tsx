@@ -31,28 +31,53 @@ const THEME = {
   cream: "#fbfaf7",
 };
 
+type ResponsiveBackground = {
+  label: string;
+  desktopSrc: string;
+  mobileSrc: string;
+};
+
 const HERO_BACKGROUNDS = {
   mapleDusk: {
     label: "Maple dusk",
-    src: "/backgrounds/hero-maple-dusk.svg",
+    desktopSrc: "/backgrounds/hero-maple-dusk.svg",
+    mobileSrc: "/backgrounds/hero-maple-dusk.svg",
   },
   forestGolden: {
     label: "Forest golden",
-    src: "/backgrounds/hero-forest-golden.svg",
+    desktopSrc: "/backgrounds/hero-forest-golden.svg",
+    mobileSrc: "/backgrounds/hero-forest-golden.svg",
   },
   softCream: {
     label: "Soft cream",
-    src: "/backgrounds/hero-soft-cream.svg",
+    desktopSrc: "/backgrounds/hero-soft-cream.svg",
+    mobileSrc: "/backgrounds/hero-soft-cream.svg",
   },
 } as const;
 
 const ACTIVE_HERO_THEME: keyof typeof HERO_BACKGROUNDS = "mapleDusk";
 
 const SECTION_BACKGROUNDS = {
-  hero: "/backgrounds/sections/hero-watercolor-maple.svg",
-  photos: "/backgrounds/sections/photos-watercolor-frame.svg",
-  travel: "/backgrounds/sections/travel-watercolor-route.svg",
-  rsvp: "/backgrounds/sections/rsvp-watercolor-letter.svg",
+  hero: {
+    label: "Hero section texture",
+    desktopSrc: "/backgrounds/sections/hero-watercolor-maple.svg",
+    mobileSrc: "/backgrounds/sections/hero-watercolor-maple.svg",
+  },
+  photos: {
+    label: "Photos section texture",
+    desktopSrc: "/backgrounds/sections/photos-watercolor-frame.svg",
+    mobileSrc: "/backgrounds/sections/photos-watercolor-frame.svg",
+  },
+  travel: {
+    label: "Travel section texture",
+    desktopSrc: "/backgrounds/sections/travel-watercolor-route.svg",
+    mobileSrc: "/backgrounds/sections/travel-watercolor-route.svg",
+  },
+  rsvp: {
+    label: "RSVP section texture",
+    desktopSrc: "/backgrounds/sections/rsvp-watercolor-letter.svg",
+    mobileSrc: "/backgrounds/sections/rsvp-watercolor-letter.svg",
+  },
 } as const;
 
 const WEDDING = {
@@ -224,6 +249,22 @@ function classNames(...xs: Array<string | false | null | undefined>) {
   return xs.filter(Boolean).join(" ");
 }
 
+function useIsMobile(maxWidthPx = 767) {
+  const query = `(max-width: ${maxWidthPx}px)`;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(query);
+    setIsMobile(mediaQuery.matches);
+
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mediaQuery.addEventListener("change", onChange);
+    return () => mediaQuery.removeEventListener("change", onChange);
+  }, [query]);
+
+  return isMobile;
+}
+
 function formatDateLong(date: Date) {
   return date.toLocaleDateString("en-CA", {
     weekday: "long",
@@ -374,16 +415,21 @@ function AmbientSection({
   className,
   children,
 }: {
-  bgImage: string;
+  bgImage: ResponsiveBackground;
   className?: string;
   children: React.ReactNode;
 }) {
+  const bgStyle = {
+    ["--bg-mobile" as string]: `url(${bgImage.mobileSrc})`,
+    ["--bg-desktop" as string]: `url(${bgImage.desktopSrc})`,
+  } as React.CSSProperties;
+
   return (
     <div className={classNames("relative isolate overflow-hidden", className)}>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-[0.16] blur-[2px]"
-        style={{ backgroundImage: `url(${bgImage})` }}
+        className="responsive-bg pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-[0.16] blur-[2px]"
+        style={bgStyle}
       />
       <div aria-hidden className="pointer-events-none absolute -left-20 top-10 -z-10 h-72 w-72 rounded-full bg-white/80 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -right-20 bottom-6 -z-10 h-72 w-72 rounded-full bg-white/70 blur-3xl" />
@@ -525,6 +571,7 @@ function PhotoGrid() {
             fill
             className="object-cover saturate-[0.92] contrast-[1.06] brightness-[1.03] transition duration-700 group-hover:scale-[1.03]"
             sizes={featured?.sizes || "(min-width: 1024px) 58vw, 100vw"}
+            loading="lazy"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-90" />
@@ -553,6 +600,7 @@ function PhotoGrid() {
                 fill
                 className="object-cover saturate-[0.92] contrast-[1.06] brightness-[1.03] transition duration-700 group-hover:scale-[1.04]"
                 sizes={p.sizes}
+                loading="lazy"
               />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-[rgba(42,32,24,0.56)] via-[rgba(139,47,47,0.12)] to-transparent opacity-85" />
@@ -950,14 +998,17 @@ export default function WeddingWebsite() {
   const weddingDate = useMemo(() => new Date(WEDDING.dateISO), []);
   const countdown = useCountdown(weddingDate.getTime());
   const currentHero = HERO_BACKGROUNDS[ACTIVE_HERO_THEME];
-  const [heroImageLoaded, setHeroImageLoaded] = useState(true);
+  const isMobile = useIsMobile();
+  const activeHeroSrc = isMobile ? currentHero.mobileSrc : currentHero.desktopSrc;
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
   useEffect(() => {
+    setHeroImageLoaded(false);
     const img = new window.Image();
-    img.src = currentHero.src;
+    img.src = activeHeroSrc;
     img.onload = () => setHeroImageLoaded(true);
     img.onerror = () => setHeroImageLoaded(false);
-  }, [currentHero.src]);
+  }, [activeHeroSrc]);
 
   return (
     <div id="top" className="min-h-screen text-black" style={{ background: THEME.cream }}>
@@ -972,7 +1023,11 @@ export default function WeddingWebsite() {
           <div className="absolute inset-0 -z-10">
             <div
               className="absolute inset-0 bg-gradient-to-br from-[#fbf5ea] via-[#f2e4d4] to-[rgba(139,47,47,0.28)] bg-cover bg-center"
-              style={heroImageLoaded ? { backgroundImage: `url(${currentHero.src})` } : undefined}
+              style={
+                heroImageLoaded
+                  ? ({ backgroundImage: `url(${activeHeroSrc})` } as React.CSSProperties)
+                  : undefined
+              }
               role="img"
               aria-label={`Hero background: ${currentHero.label}`}
             />
