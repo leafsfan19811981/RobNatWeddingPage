@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="Venue detail filler image">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3dfc7"/>
+      <stop offset="1" stop-color="#d3b18a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1500" fill="url(#sky)"/>
+  <rect x="60" y="380" width="1080" height="860" rx="40" fill="#6f4734" opacity="0.88"/>
+  <rect x="150" y="470" width="900" height="680" rx="24" fill="#8e5f47" opacity="0.88"/>
+  <rect x="290" y="640" width="620" height="510" rx="14" fill="#f3e4d4" opacity="0.95"/>
+  <rect x="560" y="745" width="120" height="405" fill="#8e5f47" opacity="0.55"/>
+  <g>
+    <circle cx="170" cy="500" r="15" fill="#ffd89f"/>
+    <circle cx="280" cy="470" r="14" fill="#ffe0ac"/>
+    <circle cx="390" cy="510" r="15" fill="#ffd89f"/>
+    <circle cx="500" cy="470" r="14" fill="#ffe0ac"/>
+    <circle cx="610" cy="505" r="16" fill="#ffd89f"/>
+    <circle cx="720" cy="468" r="14" fill="#ffe0ac"/>
+    <circle cx="830" cy="505" r="16" fill="#ffd89f"/>
+    <circle cx="940" cy="468" r="14" fill="#ffe0ac"/>
+    <circle cx="1030" cy="500" r="15" fill="#ffd89f"/>
+  </g>
+  <rect width="1200" height="1500" fill="#8b2f2f" opacity="0.08"/>
+</svg>
