@@ -1,0 +1,20 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#F8F6F1"/>
+  <g opacity="0.48" filter="url(#blurC)">
+    <ellipse cx="250" cy="220" rx="260" ry="180" fill="#94B29C"/>
+    <ellipse cx="620" cy="170" rx="300" ry="200" fill="#D8C39A"/>
+    <ellipse cx="960" cy="300" rx="260" ry="190" fill="#B26A58"/>
+    <ellipse cx="760" cy="600" rx="320" ry="210" fill="#DDBB84"/>
+    <ellipse cx="280" cy="610" rx="270" ry="190" fill="#7C9D88"/>
+  </g>
+  <g opacity="0.28">
+    <path d="M90 540C220 430 360 460 500 520C640 580 760 560 930 430C990 385 1060 350 1120 350" stroke="#2F4A3A" stroke-width="10" stroke-linecap="round" stroke-dasharray="8 14"/>
+    <circle cx="90" cy="540" r="18" fill="#8B2F2F"/>
+    <circle cx="1120" cy="350" r="18" fill="#8B2F2F"/>
+  </g>
+  <defs>
+    <filter id="blurC" x="-120" y="-80" width="1460" height="1020" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="48"/>
+    </filter>
+  </defs>
+</svg>
