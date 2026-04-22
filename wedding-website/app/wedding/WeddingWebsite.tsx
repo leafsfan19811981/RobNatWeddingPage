@@ -158,7 +158,7 @@ const PHOTOS: PhotoItem[] = [
     ratio: "3:2",
     sizes: "(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw",
   },
-].filter((p) => Boolean(p.src));
+] satisfies PhotoItem[];
 
 type Hotel = { name: string; area: string; url: string; notes: string };
 
