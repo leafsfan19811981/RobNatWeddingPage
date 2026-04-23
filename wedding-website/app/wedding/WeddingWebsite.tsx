@@ -881,91 +881,106 @@ function DetailsGrid() {
 
 function Venue() {
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
-      <Card>
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <div className="text-base font-semibold">{WEDDING.venueName}</div>
-            <div className="mt-2 text-black/70">{WEDDING.venueAddressLine}</div>
-          </div>
-          <a
-            href={WEDDING.venueWebsite}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[rgba(200,162,90,0.10)]"
-          >
-            Venue site <ExternalLink className="h-4 w-4" />
-          </a>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a
-            className="rounded-2xl bg-gradient-to-r from-[rgba(47,74,58,0.98)] to-[rgba(42,32,24,0.98)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-              `${WEDDING.venueName} ${WEDDING.venueAddressLine}`
-            )}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open in Google Maps
-          </a>
-          <a
-            className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[rgba(200,162,90,0.10)]"
-            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-              `${WEDDING.venueName} ${WEDDING.venueAddressLine}`
-            )}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Get directions
-          </a>
-        </div>
-
-        <div className="mt-6 grid gap-3">
-          <div className="rounded-2xl bg-black/5 p-4 text-sm text-black/70">
-            <div className="font-semibold">Rain plan</div>
-            <div className="mt-2">If needed, the ceremony will move to a covered rustic gazebo with plenty of space.</div>
-          </div>
-          <div className="rounded-2xl bg-black/5 p-4 text-sm text-black/70">
-            <div className="font-semibold">Campfire zone</div>
-            <div className="mt-2">There will be a rustic campfire area for mingling (and potentially marshmallows).</div>
-          </div>
-          <div className="rounded-2xl bg-black/5 p-4 text-sm text-black/70">
-            <div className="font-semibold">Smoking / vaping</div>
-            <div className="mt-2">Designated smoking/vaping areas will be available on site.</div>
-          </div>
-          <div className="rounded-2xl bg-black/5 p-4 text-sm text-black/70">
-            <div className="font-semibold">Note</div>
-            <div className="mt-2">No pets, please.</div>
-          </div>
-        </div>
-      </Card>
-
-      <Card>
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="text-base font-semibold">Map preview</div>
-          <a
-            href={WEDDING.venueWeddingPackages}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[rgba(139,47,47,0.98)] to-[rgba(42,32,24,0.98)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
-          >
-            Wedding packages <ExternalLink className="h-4 w-4" />
-          </a>
-        </div>
-        <div className="mt-2 text-sm text-black/60">If embeds are blocked, the buttons on the left always work.</div>
-        <div className="mt-4 overflow-hidden rounded-2xl border border-black/10 bg-white">
-          <iframe
-            title="Map"
-            className="h-80 w-full"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            src={`https://www.google.com/maps?q=${encodeURIComponent(
-              `${WEDDING.venueName} ${WEDDING.venueAddressLine}`
-            )}&output=embed`}
+    <div className="space-y-4">
+      <div className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm">
+        <div className="relative aspect-[16/9] w-full">
+          <Image
+            src="/photos/Event%20background%20hero.png"
+            alt="Maple Hills Farms wedding venue."
+            fill
+            className="object-cover"
+            sizes="(min-width: 1024px) 1100px, 100vw"
+            priority={false}
           />
         </div>
-      </Card>
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <div className="text-base font-semibold">{WEDDING.venueName}</div>
+              <div className="mt-2 text-black/70">{WEDDING.venueAddressLine}</div>
+            </div>
+            <a
+              href={WEDDING.venueWebsite}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[rgba(200,162,90,0.10)]"
+            >
+              Venue site <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            <a
+              className="rounded-2xl bg-gradient-to-r from-[rgba(47,74,58,0.98)] to-[rgba(42,32,24,0.98)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                `${WEDDING.venueName} ${WEDDING.venueAddressLine}`
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open in Google Maps
+            </a>
+            <a
+              className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[rgba(200,162,90,0.10)]"
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                `${WEDDING.venueName} ${WEDDING.venueAddressLine}`
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Get directions
+            </a>
+          </div>
+
+          <div className="mt-6 grid gap-3">
+            <div className="rounded-2xl bg-black/5 p-4 text-sm text-black/70">
+              <div className="font-semibold">Rain plan</div>
+              <div className="mt-2">If needed, the ceremony will move to a covered rustic gazebo with plenty of space.</div>
+            </div>
+            <div className="rounded-2xl bg-black/5 p-4 text-sm text-black/70">
+              <div className="font-semibold">Campfire zone</div>
+              <div className="mt-2">There will be a rustic campfire area for mingling (and potentially marshmallows).</div>
+            </div>
+            <div className="rounded-2xl bg-black/5 p-4 text-sm text-black/70">
+              <div className="font-semibold">Smoking / vaping</div>
+              <div className="mt-2">Designated smoking/vaping areas will be available on site.</div>
+            </div>
+            <div className="rounded-2xl bg-black/5 p-4 text-sm text-black/70">
+              <div className="font-semibold">Note</div>
+              <div className="mt-2">No pets, please.</div>
+            </div>
+          </div>
+        </Card>
+
+        <Card>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="text-base font-semibold">Map preview</div>
+            <a
+              href={WEDDING.venueWeddingPackages}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[rgba(139,47,47,0.98)] to-[rgba(42,32,24,0.98)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
+            >
+              Wedding packages <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
+          <div className="mt-2 text-sm text-black/60">If embeds are blocked, the buttons on the left always work.</div>
+          <div className="mt-4 overflow-hidden rounded-2xl border border-black/10 bg-white">
+            <iframe
+              title="Map"
+              className="h-80 w-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(
+                `${WEDDING.venueName} ${WEDDING.venueAddressLine}`
+              )}&output=embed`}
+            />
+          </div>
+        </Card>
+      </div>
     </div>
   );
 }
