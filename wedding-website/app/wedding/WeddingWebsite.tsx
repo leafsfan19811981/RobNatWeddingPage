@@ -100,6 +100,7 @@ const WEDDING = {
 
   // Leave blank until ready
   registryUrl:"https://www.amazon.ca/wedding/guest-view/C514H7K0OMXA",
+  gameUrl: "https://game.robandnatwedding.com",
 };
 
 type PhotoItem = {
@@ -453,6 +454,12 @@ function Nav() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <a
+            href={WEDDING.gameUrl}
+            className="hidden rounded-2xl border border-black/10 bg-white/75 px-4 py-2 text-sm font-semibold text-black/75 shadow-sm transition hover:bg-white/90 sm:inline-flex"
+          >
+            Dance game
+          </a>
           <a
             href="#rsvp"
             className="rounded-2xl bg-gradient-to-r from-[rgba(139,47,47,0.98)] to-[rgba(42,32,24,0.98)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
@@ -1068,6 +1075,12 @@ export default function WeddingWebsite() {
                       className="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white/80 px-5 py-3 text-sm font-semibold text-black/80 backdrop-blur transition hover:bg-white/90"
                     >
                       Venue + directions
+                    </a>
+                    <a
+                      href={WEDDING.gameUrl}
+                      className="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white/80 px-5 py-3 text-sm font-semibold text-black/80 backdrop-blur transition hover:bg-white/90"
+                    >
+                      Play Dance Floor Fever
                     </a>
                   </div>
 
